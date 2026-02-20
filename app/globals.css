@@ -1,26 +1,30 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Ultra-Minimalist Monochrome Palette */
+  --color-shrwd-bg: #000000;
+  --color-shrwd-card: #0A0A0A;
+  --color-shrwd-border: #1A1A1A;
+  --color-shrwd-border-hover: #333333;
+  --color-shrwd-text: #FFFFFF;
+  --color-shrwd-subtext: #888888;
+  --color-shrwd-muted: #444444;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Font Mapping for Specialty Fonts Only */
+  --font-brand: var(--font-audiowide), ui-sans-serif, system-ui;
+  --font-logo: var(--font-museo), ui-sans-serif, system-ui;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Premium Slide-Up Animation */
+  --animate-fade-in-up: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
