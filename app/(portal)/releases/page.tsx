@@ -41,25 +41,27 @@ const RELEASES = [
 
 export default function ReleasesPage() {
     return (
-        <div className="min-h-screen bg-shrwd-bg text-shrwd-text flex flex-col items-center pb-20">
+        <div className="min-h-screen bg-shrwd-bg text-shrwd-text flex flex-col items-center">
 
-            {/* Top Navigation */}
-            <header className="w-full max-w-2xl px-6 py-8 flex justify-between items-center">
-                <Link
-                    href="/dashboard"
-                    className="text-shrwd-subtext hover:text-white transition-colors flex items-center gap-2 text-sm font-medium"
-                >
-                    <ArrowLeft className="w-4 h-4" />
-                    <span className="hidden sm:inline">Back to Dashboard</span>
-                    <span className="sm:hidden">Back</span>
-                </Link>
-                <h2 className="text-xl tracking-tighter text-shrwd-text font-logo lowercase flex items-baseline select-none opacity-50">
-                    shrwd<span className="text-[#50C878] ml-[1px] text-2xl leading-none">.</span>
-                </h2>
+            {/* Top Navigation - Now Sticky with Glass Blur */}
+            <header className="sticky top-0 z-50 w-full bg-shrwd-bg/80 backdrop-blur-md border-b border-shrwd-border/50 flex justify-center">
+                <div className="w-full max-w-2xl px-6 py-4 sm:py-5 flex justify-between items-center">
+                    <Link
+                        href="/dashboard"
+                        className="text-shrwd-subtext hover:text-white transition-colors flex items-center gap-2 text-sm font-medium"
+                    >
+                        <ArrowLeft className="w-4 h-4" />
+                        <span className="hidden sm:inline">Back to Dashboard</span>
+                        <span className="sm:hidden">Back</span>
+                    </Link>
+                    <h2 className="text-xl tracking-tighter text-shrwd-text font-logo lowercase flex items-baseline select-none opacity-50">
+                        shrwd<span className="text-[#50C878] ml-[1px] text-2xl leading-none">.</span>
+                    </h2>
+                </div>
             </header>
 
-            {/* Main Content Area */}
-            <main className="w-full max-w-2xl px-6 flex flex-col mt-4 sm:mt-8 opacity-0 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
+            {/* Main Content Area - Added pb-24 for bottom breathing room */}
+            <main className="w-full max-w-2xl px-6 pb-24 flex flex-col mt-6 sm:mt-12 opacity-0 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
 
                 <div className="mb-12">
                     <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-4 text-shrwd-text">
@@ -104,7 +106,6 @@ export default function ReleasesPage() {
                                             </div>
                                             <h3 className="text-sm font-semibold text-white uppercase tracking-wider">Added</h3>
                                         </div>
-                                        {/* Fixed Bullets: Replaced pseudo-elements with physical span dots */}
                                         <ul className="space-y-3 pl-2">
                                             {release.changes.added.map((item, i) => (
                                                 <li key={i} className="flex items-start gap-3 text-sm text-shrwd-subtext leading-relaxed">
