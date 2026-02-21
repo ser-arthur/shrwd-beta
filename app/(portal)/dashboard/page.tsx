@@ -89,12 +89,13 @@ export default function DashboardPage() {
                         <div className="flex flex-col animate-fade-in-up" style={{ animationDuration: '0.4s' }}>
                             <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start">
 
-                                {/* DESKTOP ONLY: QR Code Placeholder */}
-                                <div className="hidden sm:flex w-48 h-48 bg-white rounded-xl p-3 flex-shrink-0 items-center justify-center">
-                                    <div className="w-full h-full border-4 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center text-gray-400">
-                                        <QrCode className="w-12 h-12 mb-2 text-black" />
-                                        <span className="text-xs font-bold text-black uppercase tracking-widest">QR Code Here</span>
-                                    </div>
+                                {/* DESKTOP ONLY: QR Code */}
+                                <div className="hidden sm:flex w-48 h-48 bg-white rounded-xl p-3 flex-shrink-0 items-center justify-center shadow-inner">
+                                    <img
+                                        src="/shrwd-qr.svg"
+                                        alt="Scan to open SHRWD in Expo Go"
+                                        className="w-full h-full object-contain rounded-lg"
+                                    />
                                 </div>
 
                                 {/* Steps */}
@@ -120,10 +121,10 @@ export default function DashboardPage() {
                                         </div>
                                     </div>
 
-                                    {/* MOBILE ONLY: Deep Link Button (Moved to the bottom!) */}
+                                    {/* Deep Link Button to Launch Expo on Mobile */}
                                     <div className="w-full sm:hidden pt-4 border-t border-shrwd-border mt-2">
                                         <a
-                                            href="exp://u.expo.dev/update/YOUR-EXPO-ID"
+                                            href="exp://u.expo.dev/229549a8-9c7c-46a3-bdc5-92fbc6b37512/group/54613278-906b-46be-829b-bfa41bb5a82b"
                                             className="w-full bg-white hover:bg-gray-200 text-black font-semibold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-3 shadow-lg"
                                         >
                                             <Smartphone className="w-5 h-5" />

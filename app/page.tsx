@@ -52,7 +52,7 @@ export default function BetaPortalLogin() {
               {/* Subtle Divider */}
               <div className="w-12 h-[1px] bg-shrwd-muted mb-6 opacity-70"></div>
 
-              <h1 className="text-lg sm:text-xl font-semibold tracking-tight mb-2 text-gray-300">
+              <h1 className="text-lg sm:text-xl font-semibold tracking-tight mb-2 text-white">
                 Developer Access
               </h1>
               <p className="text-shrwd-subtext text-sm leading-relaxed px-2 sm:px-4">

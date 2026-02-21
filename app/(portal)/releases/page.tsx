@@ -12,10 +12,10 @@ const RELEASES = [
             added: [
                 "Redesigned overview screen to include upcoming bills from budget planner.",
                 "Smart icon categorization for recurring subscriptions.",
-                "Smooth gesture animations when swiping between Planner and Insights."
+                "Layout Optimizations"
             ],
             removed: [
-                "Stripped down cluttered pie charts to keep the UI purely functional and text-driven."
+                "Stripped down cluttered pie charts to keep the UI clean and text-driven."
             ],
             fixed: [
                 "Fixed cross-currency conversion logic to ensure accurate totals",
