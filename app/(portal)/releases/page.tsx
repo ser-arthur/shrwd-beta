@@ -10,16 +10,16 @@ const RELEASES = [
         isLatest: true,
         changes: {
             added: [
-                "New streamlined overview screen for quick budget checks.",
+                "Redesigned overview screen to include upcoming bills from budget planner.",
                 "Smart icon categorization for recurring subscriptions.",
                 "Smooth gesture animations when swiping between Planner and Insights."
             ],
             removed: [
-                "Stripped out the cluttered pie charts to keep the UI purely functional and text-driven."
+                "Stripped down cluttered pie charts to keep the UI purely functional and text-driven."
             ],
             fixed: [
-                "Resolved an issue where overdue bills were not highlighting in red.",
-                "Fixed the bottom sheet navigation occasionally hanging on older Android devices."
+                "Fixed cross-currency conversion logic to ensure accurate totals",
+                "Fixed start-up delay bug on older android devices."
             ]
         }
     },
@@ -68,7 +68,7 @@ export default function ReleasesPage() {
                         Release History
                     </h1>
                     <p className="text-shrwd-subtext text-sm sm:text-base leading-relaxed">
-                        Track the evolution of SHRWD. See what's new, what's fixed, and what's been removed to keep things clean.
+                        Track the evolution of SHRWD. Documenting our continuous effort to build a faster, smarter, and cleaner budgeting experience.
                     </p>
                 </div>
 

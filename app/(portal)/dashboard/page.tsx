@@ -173,7 +173,7 @@ export default function DashboardPage() {
                                     <div className="flex items-center justify-center gap-2 mt-4 text-xs text-shrwd-muted font-medium">
                                         <span>v1.0.0-beta.1</span>
                                         <span className="w-1 h-1 rounded-full bg-shrwd-border"></span>
-                                        <span>~45MB</span>
+                                        <span>~82MB</span>
                                         <span className="w-1 h-1 rounded-full bg-shrwd-border"></span>
                                         <span>Android 10+</span>
                                     </div>
