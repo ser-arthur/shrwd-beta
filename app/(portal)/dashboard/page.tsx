@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { QrCode, Download, ExternalLink, Smartphone, ShieldCheck, LogOut } from "lucide-react";
+import { QrCode, Download, ExternalLink, Smartphone, ShieldCheck, LogOut, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import {ArrowRight} from "lucide-react";
 
 export default function DashboardPage() {
     const [platform, setPlatform] = useState<"ios" | "android">("ios");
@@ -18,22 +17,24 @@ export default function DashboardPage() {
     return (
         <div className="min-h-screen bg-shrwd-bg text-shrwd-text flex flex-col items-center">
 
-            {/* Top Navigation Bar */}
-            <header className="w-full max-w-4xl px-6 py-8 flex justify-between items-center">
-                <h2 className="text-2xl tracking-tighter text-shrwd-text font-logo lowercase flex items-baseline select-none">
-                    shrwd<span className="text-[#50C878] ml-[1px] text-3xl leading-none">.</span>
-                </h2>
-                <button
-                    onClick={handleSignOut}
-                    className="text-shrwd-subtext hover:text-white transition-colors flex items-center gap-2 text-sm font-medium"
-                >
-                    <LogOut className="w-4 h-4" />
-                    <span className="hidden sm:inline">Sign Out</span>
-                </button>
+            {/* Top Navigation Bar - Now Sticky with Glass Blur */}
+            <header className="sticky top-0 z-50 w-full bg-shrwd-bg/80 backdrop-blur-md border-b border-shrwd-border/50 flex justify-center">
+                <div className="w-full max-w-4xl px-6 py-4 sm:py-5 flex justify-between items-center">
+                    <h2 className="text-2xl tracking-tighter text-shrwd-text font-logo lowercase flex items-baseline select-none">
+                        shrwd<span className="text-[#50C878] ml-[1px] text-3xl leading-none">.</span>
+                    </h2>
+                    <button
+                        onClick={handleSignOut}
+                        className="text-shrwd-subtext hover:text-white transition-colors flex items-center gap-2 text-sm font-medium"
+                    >
+                        <LogOut className="w-4 h-4" />
+                        <span className="hidden sm:inline">Sign Out</span>
+                    </button>
+                </div>
             </header>
 
-            {/* Main Content Area */}
-            <main className="w-full max-w-2xl px-6 flex flex-col items-center mt-4 sm:mt-12 opacity-0 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
+            {/* Main Content Area - Added pb-24 for bottom breathing room */}
+            <main className="w-full max-w-2xl px-6 pb-24 flex flex-col items-center mt-6 sm:mt-12 opacity-0 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
 
                 {/* Header Setup */}
                 <div className="text-center mb-10 flex flex-col items-center">
@@ -41,7 +42,7 @@ export default function DashboardPage() {
                         Latest Build: v1.0.0-beta.2
                     </div>
 
-                    {/* NEW: Link to Changelog */}
+                    {/* Link to Changelog */}
                     <Link href="/releases" className="text-xs font-semibold text-shrwd-subtext hover:text-white transition-colors flex items-center gap-1 mb-8">
                         View Release History <ArrowRight className="w-3 h-3" />
                     </Link>
@@ -81,7 +82,7 @@ export default function DashboardPage() {
                 </div>
 
                 {/* Instructions Card */}
-                <div className="w-full bg-shrwd-card border border-shrwd-border rounded-2xl p-6 sm:p-8 shadow-xl mb-10 sm:mb-2">
+                <div className="w-full bg-shrwd-card border border-shrwd-border rounded-2xl p-6 sm:p-8 shadow-xl">
 
                     {/* --- iOS INSTRUCTIONS --- */}
                     {platform === "ios" && (
@@ -187,4 +188,3 @@ export default function DashboardPage() {
         </div>
     );
 }
-
