@@ -124,7 +124,7 @@ export default function DashboardPage() {
                                     {/* Deep Link Button to Launch Expo on Mobile */}
                                     <div className="w-full sm:hidden pt-4 border-t border-shrwd-border mt-2">
                                         <a
-                                            href="exp://u.expo.dev/229549a8-9c7c-46a3-bdc5-92fbc6b37512/group/ec4b754b-ac92-43c7-b2ec-a41c4f5b556f"
+                                            href="exp://u.expo.dev/229549a8-9c7c-46a3-bdc5-92fbc6b37512/group/8f875152-3699-4df0-8a46-53316d782586"
                                             className="w-full bg-white hover:bg-gray-200 text-black font-semibold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-3 shadow-lg"
                                         >
                                             <Smartphone className="w-5 h-5" />
