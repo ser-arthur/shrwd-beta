@@ -89,19 +89,19 @@ export default function DashboardPage() {
                 {/* Instructions Card */}
                 <div className="w-full bg-shrwd-card border border-shrwd-border rounded-2xl p-6 sm:p-8 shadow-xl">
 
-                    {/* --- iOS INSTRUCTIONS (COMING SOON) --- */}
+                    {/* --- iOS INSTRUCTIONS (PENDING) --- */}
                     {platform === "ios" && (
                         <div className="flex flex-col animate-fade-in-up items-center text-center py-8" style={{ animationDuration: '0.4s' }}>
                             <div className="w-16 h-16 rounded-full bg-shrwd-border flex items-center justify-center mb-6">
                                 <Smartphone className="w-8 h-8 text-shrwd-subtext" />
                             </div>
-                            <h3 className="text-xl font-semibold text-white mb-3">iOS Beta in Review</h3>
+                            <h3 className="text-xl font-semibold text-white mb-3">iOS Build in Progress</h3>
                             <p className="text-shrwd-subtext text-sm max-w-sm leading-relaxed mb-8">
-                                The native iOS build is currently undergoing final platform review and compliance checks. Access will be unlocked for the testing group in an upcoming rollout phase.
+                                The iOS version of SHRWD is currently undergoing native architecture refinements. Distribution to Apple devices will be unlocked in a future testing phase.
                             </p>
                             <div className="inline-flex items-center gap-2 bg-white/5 border border-shrwd-border rounded-lg px-4 py-2 text-xs font-bold tracking-widest text-shrwd-muted uppercase">
                                 <div className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></div>
-                                Status: Pending Platform Review
+                                Status: In Development
                             </div>
                         </div>
                     )}
@@ -121,7 +121,7 @@ export default function DashboardPage() {
                                         />
                                     </div>
                                     <p className="text-xs text-shrwd-subtext font-medium text-center leading-relaxed">
-                                        Scan with your Android camera to download directly.
+                                        Scan with your Android camera to download directly to your phone.
                                     </p>
                                 </div>
 
@@ -153,14 +153,14 @@ export default function DashboardPage() {
                                             className="w-full bg-white hover:bg-gray-200 text-black font-semibold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-3 shadow-lg"
                                         >
                                             <Download className="w-5 h-5" />
-                                            Download APK directly
+                                            <span>Download APK</span>
                                         </a>
 
                                         {/* Clean, consolidated metadata */}
                                         <div className="flex items-center justify-center gap-2 mt-4 text-xs text-shrwd-muted font-medium">
                                             <span>v1.0.0-beta.2</span>
                                             <span className="w-1 h-1 rounded-full bg-shrwd-border"></span>
-                                            <span>~82MB</span>
+                                            <span>~88MB</span>
                                             <span className="w-1 h-1 rounded-full bg-shrwd-border"></span>
                                             <span>Android 10+</span>
                                         </div>
