@@ -1,30 +1,35 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-// We can move these to a .env file later for max security
-const VALID_CODES = ["ALPHA-7X9P", "GUEST-2026"];
-
 export async function POST(request: Request) {
     try {
         const { passcode } = await request.json();
 
-        if (VALID_CODES.includes(passcode)) {
-            // Create the secure cookie vault
+        let accessLevel = null;
+
+        const alphaCode = process.env.ALPHA_PASSCODE;
+        const guestCode = process.env.GUEST_PASSCODE;
+
+        if (passcode === alphaCode) {
+            accessLevel = "granted";
+        } else if (passcode === guestCode) {
+            accessLevel = "guest";
+        }
+
+        if (accessLevel) {
             const cookieStore = await cookies();
 
-            // Drop a cookie that lasts for 30 days
-            cookieStore.set("shrwd_beta_access", "granted", {
-                httpOnly: true, // Prevents JavaScript from reading the cookie (XSS protection)
-                secure: process.env.NODE_ENV === "production", // Forces HTTPS in production
+            cookieStore.set("shrwd_beta_access", accessLevel, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production",
                 sameSite: "lax",
-                maxAge: 60 * 60 * 24 * 30, // 30 days in seconds
+                maxAge: 60 * 60 * 24 * 30,
                 path: "/",
             });
 
-            return NextResponse.json({ success: true });
+            return NextResponse.json({ success: true, role: accessLevel });
         }
 
-        // Wrong code
         return NextResponse.json({ success: false, error: "Invalid code" }, { status: 401 });
 
     } catch (error) {

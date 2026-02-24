@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <h1 style="font-family: sans-serif; font-weight: bold; letter-spacing: -1px;">
+    shrwd<span style="color: #50C878;">.</span>
+  </h1>
+  <p><strong>Beta Distribution Portal</strong></p>
+</div>
 
-## Getting Started
+---
 
-First, run the development server:
+A web portal created to securely manage the beta distribution of the SHRWD React Native mobile application. Engineered to securely distribute iOS and Android dev builds and handle OTA (Over-The-Air) release notes.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Live Demo & Access
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The portal is currently live and protected by Next.js Edge Middleware.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* **Live Site:** https://shrewd-beta.vercel.app
+* **Guest Access Key:** `GUEST-2026`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+*(Note: Guest access grants entry to the dashboard and release history for portfolio review, but binary downloads are restricted to authorized testing accounts).*
 
-## Learn More
+## Technical Architecture
 
-To learn more about Next.js, take a look at the following resources:
+This repository contains the web distribution layer. The primary native mobile application is developed and maintained in a separate repository.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Core Stack**
+* Framework: Next.js (App Router)
+* Styling: Tailwind CSS v4
+* Security:
+  * Edge-level route protection (middleware.ts) preventing unauthorized access prior to server rendering.
+  * Secure, httpOnly cookie injection via Next.js serverless API routes.
+* Hosting & Distribution:
+  * Application UI hosted on Vercel.
+  * Heavy binary hosting handled via GitHub Releases to optimize delivery and bypass serverless payload limits.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## About the Core Mobile App (SHRWD)
 
-## Deploy on Vercel
+SHRWD is a premium, locally-first personal finance and budgeting application.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* Built with React Native and Expo.
+* Global state management handled via Zustand.
+* Local data storage engineered with SQLite for secure, offline-first performance.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Designed and engineered for the SHRWD beta testing group.*
