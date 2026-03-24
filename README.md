@@ -13,7 +13,7 @@ A web portal created to securely manage the beta distribution of the SHRWD React
 
 The portal is currently live and protected by Next.js Edge Middleware.
 
-* **Live Site:** https://shrewd-beta.vercel.app
+* **Live Site:** https://shrwd-beta.vercel.app
 * **Guest Access Key:** `GUEST-2026`
 
 *(Note: Guest access grants entry to the dashboard and release history for portfolio review, but binary downloads are restricted to authorized testing accounts).*
