@@ -1,24 +1,36 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { readSession } from './lib/session';
 
-export function middleware(request: NextRequest) {
-    // Check if they have the VIP pass
-    const hasAccess = request.cookies.has('shrwd_beta_access');
+/*
+  The previous version called cookies.has('shrwd_beta_access'), which is true
+  for any value at all. The cookie is now verified, so only a signature issued
+  by this server grants access.
+*/
+export async function middleware(request: NextRequest) {
+    const role = await readSession(
+        request.cookies.get('shrwd_beta_access')?.value,
+        process.env.SESSION_SECRET,
+    );
+    const hasAccess = role !== null;
 
-    // 1. If trying to enter the portal without access -> kick to login
     if (!hasAccess && request.nextUrl.pathname.startsWith('/dashboard')) {
         return NextResponse.redirect(new URL('/', request.url));
     }
 
-    // 2. If sitting on the login screen but ALREADY logged in -> skip to dashboard
     if (hasAccess && request.nextUrl.pathname === '/') {
         return NextResponse.redirect(new URL('/dashboard', request.url));
     }
 
-    return NextResponse.next();
+    /* an unverifiable cookie is cleared, so a tampered value does not leave the
+       visitor stuck in a redirect loop */
+    const response = NextResponse.next();
+    if (!hasAccess && request.cookies.has('shrwd_beta_access')) {
+        response.cookies.set('shrwd_beta_access', '', { maxAge: 0, path: '/' });
+    }
+    return response;
 }
 
-// Tell the middleware exactly which pages to guard
 export const config = {
     matcher: ['/', '/dashboard/:path*'],
-}
+};
