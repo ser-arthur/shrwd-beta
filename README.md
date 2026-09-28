@@ -1,44 +1,43 @@
 <div align="center">
-  <h1 style="font-family: sans-serif; font-weight: bold; letter-spacing: -1px;">
-    shrwd<span style="color: #50C878;">.</span>
-  </h1>
+  <img src="public/readme-banner.png" alt="shrwd" width="480">
   <p><strong>Beta Distribution Portal</strong></p>
 </div>
 
 ---
 
-A web portal created to securely manage the beta distribution of the SHRWD React Native mobile application. Engineered to securely distribute iOS and Android dev builds and handle OTA (Over-The-Air) release notes.
+A web portal for distributing beta builds of the SHRWD React Native app, handling iOS and Android dev builds alongside over-the-air release notes.
 
-## Live Demo & Access
+## Live demo and access
 
-The portal is currently live and protected by Next.js Edge Middleware.
+* **Live site:** https://shrwd-beta.vercel.app
+* **Guest access key:** `GUEST-2026`
 
-* **Live Site:** https://shrwd-beta.vercel.app
-* **Guest Access Key:** `GUEST-2026`
+Guest access opens the dashboard and release history. The alpha tier adds the QR install flow and in-portal feedback, and is issued to the testing group.
 
-*(Note: Guest access grants entry to the dashboard and release history for portfolio review, but binary downloads are restricted to authorized testing accounts).*
+The Android build is published as a GitHub release on this repository, so it can be downloaded without a portal session. Binaries live there rather than on Vercel to stay clear of serverless payload limits.
 
-## Technical Architecture
+## Technical architecture
 
-This repository contains the web distribution layer. The primary native mobile application is developed and maintained in a separate repository.
+This repository contains the web distribution layer. The native mobile application lives in a separate repository.
 
-**Core Stack**
+**Core stack**
 * Framework: Next.js (App Router)
 * Styling: Tailwind CSS v4
-* Security:
-  * Edge-level route protection (middleware.ts) preventing unauthorized access prior to server rendering.
-  * Secure, httpOnly cookie injection via Next.js serverless API routes.
-* Hosting & Distribution:
-  * Application UI hosted on Vercel.
-  * Heavy binary hosting handled via GitHub Releases to optimize delivery and bypass serverless payload limits.
+* Hosting: Vercel, with release binaries on GitHub Releases
 
-## About the Core Mobile App (SHRWD)
+**Access control**
+* Edge middleware gates every route except the sign-in page, so access is checked before server rendering.
+* Sessions are httpOnly cookies carrying an HMAC signature, verified on every request, so the access level cannot be altered client-side.
+* Passcode attempts are rate limited and compared in constant time.
+* The feedback endpoint requires a session and caps payload size.
 
-SHRWD is a premium, locally-first personal finance and budgeting application.
+## About the mobile app
+
+SHRWD is a locally-first personal finance and budgeting application.
 
 * Built with React Native and Expo.
-* Global state management handled via Zustand.
-* Local data storage engineered with SQLite for secure, offline-first performance.
+* State management with Zustand.
+* Local storage on SQLite, for offline-first performance.
 
 ---
 *Designed and engineered for the SHRWD beta testing group.*

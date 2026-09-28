@@ -3,18 +3,10 @@ import type { NextRequest } from 'next/server';
 import { readSession } from './lib/session';
 
 /*
-  Access control for the portal.
+  Route protection.
 
-  Two earlier mistakes are fixed here, and both were failures of the same kind:
-  the gate named what to protect instead of naming what to expose.
-
-    - the matcher listed '/dashboard' only, so '/releases' was never checked
-    - the logic redirected only for paths under '/dashboard', so even a matched
-      path outside it would have fallen through
-
-  Now everything is protected except the paths named below, which means a page
-  added tomorrow is gated by default. Forgetting to add a route to a list is a
-  much easier mistake to make than forgetting to remove one.
+  Everything is gated except the paths named below, so a page added later is
+  protected by default rather than needing to be remembered.
 */
 
 const PUBLIC_PATHS = new Set(['/']);
@@ -36,8 +28,7 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL('/dashboard', request.url));
     }
 
-    /* an unverifiable cookie is cleared, so a tampered value does not leave the
-       visitor stuck in a redirect loop */
+    /* clear an unverifiable cookie, so a tampered value cannot cause a redirect loop */
     const response = NextResponse.next();
     if (!hasAccess && request.cookies.has('shrwd_beta_access')) {
         response.cookies.set('shrwd_beta_access', '', { maxAge: 0, path: '/' });
@@ -46,10 +37,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    /*
-      Everything except the API routes, Next's own assets and files with an
-      extension. The API routes verify sessions themselves, and /api/auth has
-      to stay reachable or nobody could ever sign in.
-    */
+    /* API routes verify sessions themselves, and /api/auth must stay reachable
+       for sign-in to work */
     matcher: ['/((?!api|_next/static|_next/image|.*\\..*).*)'],
 };

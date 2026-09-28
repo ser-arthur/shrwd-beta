@@ -1,18 +1,12 @@
 /*
   Signed session cookies.
 
-  The previous cookie stored the access level as plain text and the middleware
-  only checked that a cookie of that name existed. Any visitor could add
-  `shrwd_beta_access=granted` in devtools and reach the dashboard with tester
-  privileges. httpOnly does not prevent this: it stops scripts reading the
-  cookie, not a person setting one.
+  The cookie value is `role.signature`, where the signature is an HMAC of the
+  role under SESSION_SECRET. Verifying it on each request means the access
+  level can be trusted server-side rather than taken on faith from the client.
 
-  The value is now `role.signature`, where the signature is an HMAC of the role
-  under SESSION_SECRET. A forged or edited cookie fails verification, so the
-  role can be trusted on the server.
-
-  Web Crypto rather than node:crypto because the middleware runs on the edge
-  runtime, where the node module is unavailable.
+  Web Crypto rather than node:crypto, because the middleware runs on the edge
+  runtime where the node module is unavailable.
 */
 
 const enc = new TextEncoder();
@@ -35,8 +29,7 @@ async function hmacKey(secret: string): Promise<CryptoKey> {
     );
 }
 
-/* compare without an early return, so the time taken does not reveal how much
-   of the value was correct */
+/* no early return, so the time taken does not reveal how much of the value matched */
 export function safeEqual(a: string, b: string): boolean {
     if (a.length !== b.length) return false;
     let diff = 0;
@@ -51,10 +44,9 @@ export async function signSession(role: Role, secret: string): Promise<string> {
 }
 
 /*
-  Returns the role only if the signature verifies. Returns null for a missing,
-  malformed, forged or unsigned cookie, and also when SESSION_SECRET is unset:
-  failing closed is the right default, so a missing variable locks the portal
-  rather than opening it.
+  Returns the role only when the signature verifies, and null for anything
+  else. A missing SESSION_SECRET also returns null: failing closed means a
+  misconfigured deploy locks the portal rather than opening it.
 */
 export async function readSession(
     token: string | undefined,

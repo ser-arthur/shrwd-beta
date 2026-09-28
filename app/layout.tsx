@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins, Audiowide, MuseoModerno } from "next/font/google";
 import "./globals.css";
-
-// 1. Remove the 'variable' from Poppins, we will use it directly
 const poppins = Poppins({
     weight: ["400", "500", "600", "700"],
     subsets: ["latin"],

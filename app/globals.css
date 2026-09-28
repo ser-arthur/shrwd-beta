@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* Ultra-Minimalist Monochrome Palette */
+  /* Monochrome Palette */
   --color-shrwd-bg: #000000;
   --color-shrwd-card: #0A0A0A;
   --color-shrwd-border: #1A1A1A;
@@ -10,11 +10,11 @@
   --color-shrwd-subtext: #888888;
   --color-shrwd-muted: #444444;
 
-  /* Font Mapping for Specialty Fonts Only */
+  /* Font Mapping for Specialty Fonts */
   --font-brand: var(--font-audiowide), ui-sans-serif, system-ui;
   --font-logo: var(--font-museo), ui-sans-serif, system-ui;
 
-  /* Premium Slide-Up Animation */
+  /* Slide-Up Animation */
   --animate-fade-in-up: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
   @keyframes fade-in-up {

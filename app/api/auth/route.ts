@@ -5,8 +5,7 @@ import { clientKey, rateLimit } from "../../../lib/rateLimit";
 
 export async function POST(request: Request) {
     try {
-        /* a passcode endpoint with no limit is a passcode endpoint that can be
-           guessed; ten attempts a minute leaves normal use untouched */
+        /* ten attempts a minute: enough for a typo, not enough to guess */
         if (!rateLimit(clientKey(request, "auth"), 10, 60_000)) {
             return NextResponse.json(
                 { success: false, error: "Too many attempts. Try again shortly." },
@@ -24,7 +23,6 @@ export async function POST(request: Request) {
         const guestCode = process.env.GUEST_PASSCODE;
 
         if (!secret) {
-            /* fail closed rather than issue a cookie nothing can verify */
             console.error("SESSION_SECRET is not set; refusing to issue a session.");
             return NextResponse.json({ success: false, error: "Server error" }, { status: 500 });
         }

@@ -43,7 +43,7 @@ export default function ReleasesPage() {
     return (
         <div className="min-h-screen bg-shrwd-bg text-shrwd-text flex flex-col items-center">
 
-            {/* Top Navigation - Now Sticky with Glass Blur */}
+            {/* Top navigation */}
             <header className="sticky top-0 z-50 w-full bg-shrwd-bg/80 backdrop-blur-md border-b border-shrwd-border/50 flex justify-center">
                 <div className="w-full max-w-2xl px-6 py-4 sm:py-5 flex justify-between items-center">
                     <Link
@@ -60,7 +60,7 @@ export default function ReleasesPage() {
                 </div>
             </header>
 
-            {/* Main Content Area - Added pb-24 for bottom breathing room */}
+            {/* Main content */}
             <main className="w-full max-w-2xl px-6 pb-24 flex flex-col mt-6 sm:mt-12 opacity-0 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
 
                 <div className="mb-12">
@@ -72,7 +72,7 @@ export default function ReleasesPage() {
                     </p>
                 </div>
 
-                {/* The Timeline (Using your stable layout) */}
+                {/* Release timeline */}
                 <div className="relative border-l border-shrwd-border ml-3 sm:ml-4 space-y-12 pb-8">
 
                     {RELEASES.map((release, index) => (

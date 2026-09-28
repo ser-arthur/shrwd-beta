@@ -5,12 +5,8 @@ import { clientKey, rateLimit } from "../../../lib/rateLimit";
 
 const MAX_MESSAGE = 2000;
 
-/*
-  Previously this accepted an unauthenticated POST and forwarded it straight to
-  the Discord webhook, with no length limit. Anyone who found the route could
-  flood the channel. Now it requires a verified session, caps the payload and
-  rate limits per address.
-*/
+/* Requires a session, caps the payload and rate limits per address, since this
+   forwards to a webhook. */
 export async function POST(request: Request) {
     try {
         const cookieStore = await cookies();
@@ -42,8 +38,7 @@ export async function POST(request: Request) {
             );
         }
 
-        /* backticks and @ mentions are stripped so a report cannot break the
-           Discord formatting or ping the channel */
+        /* strip backticks and @ so a report cannot break Discord formatting or ping the channel */
         const clean = (value: unknown, limit: number) =>
             String(value ?? "unknown").replace(/[`@]/g, "").slice(0, limit);
 

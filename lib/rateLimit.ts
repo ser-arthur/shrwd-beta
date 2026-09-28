@@ -1,15 +1,9 @@
 /*
-  A small fixed-window rate limiter.
-
-  Honest about what this is: state lives in the memory of one serverless
-  instance, so a burst spread across instances gets a higher effective limit,
-  and counters reset on cold start. That makes it useless against a determined
-  distributed attacker and perfectly adequate against the two cases that
-  actually matter here, someone brute-forcing a passcode from one machine and
-  someone hammering the feedback webhook.
-
-  A shared store (Upstash, Vercel KV) is the upgrade if this ever needs to be
-  strict.
+  Fixed-window rate limiting, held in the memory of a single serverless
+  instance. Counters reset on cold start and are not shared between instances,
+  so the effective limit is looser than it looks. Adequate for slowing a
+  passcode guesser or a feedback flood from one source; a shared store such as
+  Vercel KV would be the upgrade if this ever needs to be strict.
 */
 
 type Window = { count: number; resetAt: number };
